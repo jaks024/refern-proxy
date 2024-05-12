@@ -1,4 +1,4 @@
-const  dotenv = require('dotenv');
+const dotenv = require('dotenv');
 const express = require('express');
 const { isbot } = require('isbot');
 const proxy = require('http-proxy');
@@ -27,6 +27,4 @@ app.use('/', async (req, res, next) => {
 
 app.listen(port, () => {
   console.log(`refern proxy listening on port ${port}`)
-})
-
-module.exports = app
+});
