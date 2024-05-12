@@ -28,3 +28,5 @@ app.use('/', async (req, res, next) => {
 app.listen(port, () => {
   console.log(`refern proxy listening on port ${port}`)
 })
+
+module.exports = app
