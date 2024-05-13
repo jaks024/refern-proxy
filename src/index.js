@@ -50,9 +50,16 @@ const forward = async (req, res, next) => {
         }, next);
     }
 };
+app.use('/robots.txt', (req, res, next) => {
+    console.log('req robot')
+    res.send(`User-Agent: *
+        Disallow:
+        `
+    );
+})
 
 app.use('/', forward);
-app.use('/robots.txt', forward);
+
 
 app.listen(port, () => {
   console.log(`refern proxy listening on port ${port}`)
