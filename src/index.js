@@ -33,7 +33,7 @@ const port = process.env.PORT;
 // console.log('listening on port ', port)
 // server.listen(port)
 
-app.use('/', async (req, res, next) => {
+const forward = async (req, res, next) => {
     // console.log('request', req)
     console.log('user agent', req.headers['user-agent'])
     if (isbot(req.headers['user-agent'])) {
@@ -49,8 +49,10 @@ app.use('/', async (req, res, next) => {
             changeOrigin: true,
         }, next);
     }
-});
+};
 
+app.use('/', forward);
+app.use('/robots.txt', forward);
 
 app.listen(port, () => {
   console.log(`refern proxy listening on port ${port}`)
