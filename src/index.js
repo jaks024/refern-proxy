@@ -51,10 +51,14 @@ const forward = async (req, res, next) => {
         }, next);
     }
 };
+app.use('/sitemap.txt', async (req, res, next) => {
+    console.log('req robot')
+    const robot = fs.readFileSync('./sitemap.txt', {encoding: 'utf-8'}) 
+    res.send(robot);
+})
 app.use('/robots.txt', async (req, res, next) => {
     console.log('req robot')
-    const robot = fs.readFileSync('./robots.txt', {encoding: 'utf-8'}) 
-    res.send(robot);
+    res.send('user-agent: *\ndisallow:\nsitemap: https://my.refern.app/sitemap.txt');
 })
 
 app.use('/', forward);
