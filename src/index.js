@@ -2,6 +2,7 @@ const dotenv = require('dotenv');
 const express = require('express');
 const { isbot } = require('isbot');
 const httpProxy = require('http-proxy');
+const fs = require('node:fs')
 
 dotenv.config({ path: './.env.development.local' });
 
@@ -50,12 +51,10 @@ const forward = async (req, res, next) => {
         }, next);
     }
 };
-app.use('/robots.txt', (req, res, next) => {
+app.use('/robots.txt', async (req, res, next) => {
     console.log('req robot')
-    res.send(`User-Agent: *
-        Disallow:
-        `
-    );
+    const robot = fs.readFileSync('./robots.txt', {encoding: 'utf-8'}) 
+    res.send(robot);
 })
 
 app.use('/', forward);
