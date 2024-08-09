@@ -60,6 +60,10 @@ app.use('/robots.txt', async (req, res, next) => {
     console.log('req robot')
     res.send('user-agent: *\ndisallow:\nsitemap: https://my.refern.app/sitemap.txt');
 })
+app.use('/ads.txt', async (req, res, next) => {
+    console.log('req ads txt')
+    res.send('google.com, pub-1547030288955263, DIRECT, f08c47fec0942fa0');
+})
 
 app.use('/', forward);
 
